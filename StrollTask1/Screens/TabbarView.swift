@@ -11,30 +11,27 @@ struct TabbarView: View {
     @State private var selectedTab: TabItem = .matches
     
     var body: some View {
-        ZStack(alignment: .bottom) {
-            VStack(spacing: 0) {
-                Group {
-                    switch selectedTab {
-                    case .home:
-                        Text("Home View")
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .background(Color.white)
-                    case .bonfire:
-                        Text("Bonfire View")
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .background(Color.white)
-                    case .matches:
-                        MatchesView()
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .background(Color.white)
-                    case .profile:
-                        Text("Profile View")
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .background(Color.white)
-                    }
+        VStack(spacing: 0) {
+            Group {
+                switch selectedTab {
+                case .home:
+                    Text("Home View")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(Color.white)
+                case .bonfire:
+                    Text("Bonfire View")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(Color.white)
+                case .matches:
+                    MatchesView()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(Color.white)
+                case .profile:
+                    Text("Profile View")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(Color.white)
                 }
             }
-            .padding(.bottom, 90)
             VStack(spacing:0) {
                 Rectangle()
                     .fill(Color.borderColor)
@@ -46,7 +43,6 @@ struct TabbarView: View {
                 )
             }
         }
-        
         .edgesIgnoringSafeArea(.bottom)
     }
 }
@@ -84,20 +80,18 @@ struct CustomTabBar: View {
     var body: some View {
         HStack {
             ForEach(TabItem.allCases, id: \.self) { tab in
-                if tab == .profile {
-                    profileTabButton(for: tab)
-                } else {
-                    tabButton(for: tab)
+                Group {
+                    if tab == .profile {
+                        profileTabButton(for: tab)
+                    } else {
+                        tabButton(for: tab)
+                    }
                 }
-
-                if tab != TabItem.allCases.last {
-                    Spacer()
-                }
+                .frame(maxWidth: .infinity)
             }
         }
         .padding(.top, 16)
         .padding(.bottom, 20)
-        .padding(.horizontal, 24)
         .background(Color.secondaryColor)
         .shadow(radius: 4)
         .safeAreaPadding(.bottom)

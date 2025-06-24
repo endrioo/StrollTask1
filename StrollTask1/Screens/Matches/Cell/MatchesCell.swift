@@ -5,29 +5,19 @@
 //  Created by Endrio on 21/06/25.
 //
 
-enum matchesCellType {
-    case normal
-    case hidden
-    case makeMove
-}
-
 import SwiftUI
 
 struct MatchesCell: View {
-    var image: String
-    var name: String
-    var age: Int
-    var message: String
-    var type: matchesCellType
+    var match: MatchModel
     
     var progress: Float = 0.6
     
     var body: some View {
         ZStack {
-            Image(image) // card image
+            Image(match.image)
                 .scaledToFill()
-                .blur(radius: type == .normal ? 0 : 15)
-            Rectangle() // the gradient
+                .blur(radius: match.type == .normal ? 0 : 15)
+            Rectangle()
                 .fill(
                     LinearGradient(
                         gradient: Gradient(colors: [Color.backgroundColor.opacity(0),
@@ -52,7 +42,7 @@ struct MatchesCell: View {
                         
                         remainingTimeView()
                     }
-                    .opacity(type == .normal ? 1 : 0)
+                    .opacity(match.type == .normal ? 1 : 0)
                     Text("📣 They made a move!")
                         .font(.ProximaNova(.bold, size: 10))
                         .padding(.vertical, 4)
@@ -60,7 +50,7 @@ struct MatchesCell: View {
                         .foregroundColor(.white)
                         .background(Color.backgroundColor)
                         .clipShape(Capsule())
-                        .opacity(type == .makeMove ? 1 : 0)
+                        .opacity(match.type == .makeMove ? 1 : 0)
                 }
                 
                 Spacer()
@@ -73,16 +63,16 @@ struct MatchesCell: View {
                         .font(.ProximaNova(.bold, size: 10))
                         .foregroundStyle(.textSecondary)
                 }
-                .disabled(type == .normal)
-                .opacity(type == .normal ? 0 : 1)
+                .disabled(match.type == .normal)
+                .opacity(match.type == .normal ? 0 : 1)
                 
                 Spacer()
                 
                 VStack(spacing: 5) {
-                    Text("\(name), \(age)")
+                    Text("\(match.name), \(match.age)")
                         .font(.ProximaNova(.bold, size: 15))
                         .foregroundStyle(Color.white)
-                    Text(message)
+                    Text(match.message)
                         .font(.ProximaNova(.regular, size: 10))
                         .foregroundStyle(.textSecondary)
                         .multilineTextAlignment(.center)
@@ -128,12 +118,20 @@ struct MatchesCell: View {
                 .font(.ProximaNova(.bold, size: 6.2))
                 .foregroundStyle(.white)
                 .frame(width: 20, height: 20)
-                .background(Color.ButtonSecondaryColor.opacity(0.2))
+                .background(Color.buttonSecondaryColor.opacity(0.2))
                 .clipShape(Circle())
         }
     }
 }
 
 #Preview {
-    MatchesCell(image: "Binghan", name: "Binghan", age: 28, message: "If you could choose to have one superpower, what would it be?", type: .normal)
+    let match = MatchModel(
+        image: "Binghan",
+        name: "Binghan",
+        age: 28,
+        message: "If you could choose to have one superpower, what would it be?",
+        type: .normal
+    )
+    
+    MatchesCell(match: match)
 }

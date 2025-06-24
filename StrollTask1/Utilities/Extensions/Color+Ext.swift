@@ -8,14 +8,14 @@
 import SwiftUI
 
 extension Color {
-    static let backgroundColor      = Color("BackgroundColor")
-    static let secondaryColor       = Color("AppSecondary")
-    static let borderColor          = Color("BorderColor")
-    static let primaryColor         = Color("AppPrimary")
-    static let disableColor         = Color("DisableColor")
-    static let textSecondaryColor   = Color("TextSecondaryColor")
-    static let ButtonSecondaryColor = Color("ButtonSecondaryColor")
-    static let DeeperAppPrimary     = Color("DeeperAppPrimary")
+    static let backgroundColor          = Color("BackgroundColor")
+    static let secondaryColor           = Color("AppSecondary")
+    static let borderColor              = Color("BorderColor")
+    static let primaryColor             = Color("AppPrimary")
+    static let disableColor             = Color("DisableColor")
+    static let textSecondaryColor       = Color("TextSecondaryColor")
+    static let buttonSecondaryColor     = Color("ButtonSecondaryColor")
+    static let deeperAppPrimaryColor     = Color("DeeperAppPrimary")
     
     init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
